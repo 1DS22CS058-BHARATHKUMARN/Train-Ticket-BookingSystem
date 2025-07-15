@@ -1,0 +1,48 @@
+[
+  {
+    "train_id": "bacs",
+    "train_no": "12345",
+    "seats": [
+      [0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0]
+    ],
+    "station_times": {
+      "Bangalore": "13:50:00",
+      "Jaipur": "13:50:00",
+      "Delhi": "13:50:00"
+    },
+    "stations": ["Bangalore", "Jaipur", "Delhi"]
+  },
+  {
+    "train_id": "express_101",
+    "train_no": "54321",
+    "seats": [
+      [0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0]
+    ],
+    "station_times": {
+      "bangalore": "09:00:00",
+      "hyderabad": "13:00:00",
+      "chennai": "17:00:00"
+    },
+    "stations": ["bangalore", "hyderabad", "chennai"]
+  },
+  {
+    "train_id": "superfast_202",
+    "train_no": "67890",
+    "seats": [
+      [0, 0, 0, 0],
+      [0, 0, 0, 0]
+    ],
+    "station_times": {
+      "delhi": "08:30:00",
+      "agra": "10:00:00",
+      "kanpur": "12:00:00"
+    },
+    "stations": ["delhi", "agra", "kanpur"]
+  }
+]

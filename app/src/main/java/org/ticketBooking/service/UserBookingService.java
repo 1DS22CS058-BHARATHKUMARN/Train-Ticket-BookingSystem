@@ -7,7 +7,9 @@ import org.ticketBooking.entities.User;
 import org.ticketBooking.util.UserServiceUtil;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -18,7 +20,7 @@ public class UserBookingService {
     private List<User> userList;
     private ObjectMapper objectMapper=new ObjectMapper();
 
-    private static final String USER_FILE_PATH="app/src/main/java/org/ticketBooking/localDB/users.json";
+    private static final String USER_FILE_PATH="localDB/users.json";
 
     public UserBookingService(User user) throws IOException {
         this.user = user;
@@ -28,7 +30,11 @@ public class UserBookingService {
         loadUserListFromFile();
     }
     private void loadUserListFromFile() throws IOException {
-        userList = objectMapper.readValue(new File(USER_FILE_PATH), new TypeReference<List<User>>() {});
+        InputStream is = getClass().getClassLoader().getResourceAsStream("localDB/users.json");
+        if (is == null) {
+            throw new FileNotFoundException("users.json not found in resources/localDB");
+        }
+        userList = objectMapper.readValue(is, new TypeReference<List<User>>() {});
     }
 
     public Boolean loginUser(){
@@ -91,8 +97,20 @@ public class UserBookingService {
             return new ArrayList<>();
         }
     }
+    public Train findExactTrain(String trainId) throws IOException {
+        TrainService trainService = new TrainService();
+        List<Train> allTrains = trainService.getAllTrains(); // load full original list
+        for (Train t : allTrains) {
+            if (t.getTrainId().equals(trainId)) {
+                return t; // ✅ Return the actual train object with seat references intact
+            }
+        }
+        return null;
+    }
+
 
     public List<List<Integer>> fetchSeats(Train train){
+        System.out.println("Seats from train: " + train.getSeats());
         return train.getSeats();
     }
 
